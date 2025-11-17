@@ -28,6 +28,7 @@ const posts = (await getCollection('blog')).sort(
       {posts.map((post) => (
         <PostCard
           href={`/blog/${post.slug}/`}
+          slug={post.slug}
           title={post.data.title}
           description={post.data.description}
           pubDate={post.data.pubDate}

@@ -29,6 +29,7 @@ const recentPosts = posts.slice(0, 3);
         {recentPosts.map((post) => (
           <PostCard
             href={`/blog/${post.slug}/`}
+            slug={post.slug}
             title={post.data.title}
             description={post.data.description}
             pubDate={post.data.pubDate}

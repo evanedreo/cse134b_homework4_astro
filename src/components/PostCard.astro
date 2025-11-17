@@ -3,13 +3,14 @@ import TagList from './TagList.astro';
 
 type Props = {
   href: string;
+  slug: string;
   title: string;
   description: string;
   pubDate: Date;
   tags: string[];
 };
 
-const { href, title, description, pubDate, tags } = Astro.props as Props;
+const { href, slug, title, description, pubDate, tags } = Astro.props as Props;
 
 const formattedDate = new Intl.DateTimeFormat('en-US', {
   month: 'short',
@@ -22,7 +23,9 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
   <a href={href} class="card-link">
     <header class="card-header">
       <p class="card-date">{formattedDate}</p>
-      <h2 class="card-title">{title}</h2>
+      <h2 class="card-title" transition:name={`post-title-${slug}`} transition:animate="fade">
+        {title}
+      </h2>
       <p class="card-description">{description}</p>
     </header>
     <footer class="card-footer">

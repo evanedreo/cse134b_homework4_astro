@@ -28,7 +28,13 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
   <article class="panel article">
     <header class="article-header">
       <p class="article-kicker">Astro Minimal JS Lab · Blog</p>
-      <h1 class="article-title">{title}</h1>
+      <h1
+        class="article-title"
+        transition:name={`post-title-${post.slug}`}
+        transition:animate="slide"
+      >
+        {title}
+      </h1>
       <p class="article-meta">
         <time datetime={pubDate.toISOString()}>{formattedDate}</time>
         {updatedDate && (
