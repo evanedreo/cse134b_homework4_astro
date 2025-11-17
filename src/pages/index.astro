@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const recentPosts = posts.slice(0, 3);
+---
+
+<BaseLayout
+  title="Astro Minimal JS Lab · Content-Heavy, JavaScript-Light"
+  description="A content-rich Astro demo for CSE 134B showing static site generation, reusable layouts, and minimal JavaScript."
+>
+  <Hero
+    title="A static site that takes “ship less JavaScript” seriously."
+    kicker="This lab explores how Astro’s static-first rendering makes it easy to publish a lot of content—blog posts, guides, and notes—without turning every page into an app."
+  />
+
+  <div class="page-grid">
+    <section class="panel" aria-labelledby="recent-posts-heading">
+      <header class="panel-heading">
+        <p id="recent-posts-heading" class="panel-title">Recent thinking</p>
+        <span class="pill">Content collection · Blog</span>
+      </header>
+      <div class="post-grid">
+        {recentPosts.map((post) => (
+          <PostCard
+            href={`/blog/${post.slug}/`}
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            tags={post.data.tags}
+          />
+        ))}
+      </div>
+    </section>
+
+    <aside class="panel panel--muted" aria-labelledby="site-overview-heading">
+      <header class="panel-heading">
+        <p id="site-overview-heading" class="panel-title">Project overview</p>
+        <span class="pill">CSE 134B · Homework 4</span>
+      </header>
+      <p class="overview-body">
+        This mini-site is intentionally small but opinionated. It uses Astro to model posts as a
+        content collection, render them through a shared layout, and produce static HTML for every
+        route—including the blog index and detail pages.
+      </p>
+      <p class="overview-body">
+        You can use it as a reference for how to go beyond a basic “hello world” sample and build a
+        project that exercises routing, data modeling, and design while still shipping a negligible
+        JavaScript bundle.
+      </p>
+      <ul class="overview-list">
+        <li>Shared header/footer & base layout</li>
+        <li>Markdown blog posts with typed frontmatter</li>
+        <li>Static blog index and detail routes</li>
+        <li>Design focused on typography and readability</li>
+      </ul>
+      <a href="/blog/" class="overview-link">Browse all posts →</a>
+    </aside>
+  </div>
+</BaseLayout>
+
+<style>
+  .post-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .overview-body {
+    margin: 0 0 0.7rem;
+    font-size: 0.9rem;
+    color: #e5e7eb;
+    line-height: 1.7;
+  }
+
+  .overview-list {
+    margin: 0.5rem 0 0.8rem;
+    padding-left: 1.1rem;
+    font-size: 0.86rem;
+    color: #d1d5db;
+  }
+
+  .overview-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.88rem;
+    color: #fbbf24;
+  }
+</style>
+

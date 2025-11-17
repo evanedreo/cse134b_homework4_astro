@@ -1,0 +1,173 @@
+---
+const { eyebrow = 'CSE 134B · Static Site Project', title, kicker } = Astro.props as {
+  eyebrow?: string;
+  title: string;
+  kicker?: string;
+};
+---
+
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">{eyebrow}</p>
+    <h1 class="hero-title">{title}</h1>
+    {kicker && <p class="hero-kicker">{kicker}</p>}
+    <div class="hero-meta">
+      <div class="meta-item">
+        <p class="meta-label">Static output</p>
+        <p class="meta-value">Pure HTML · No hydration</p>
+      </div>
+      <div class="meta-item">
+        <p class="meta-label">Content model</p>
+        <p class="meta-value">Astro content collections</p>
+      </div>
+      <div class="meta-item">
+        <p class="meta-label">Goal</p>
+        <p class="meta-value">Render a lot, ship a little</p>
+      </div>
+    </div>
+  </div>
+
+  <aside class="hero-right" aria-label="At-a-glance summary of the site">
+    <div class="mini-panel">
+      <p class="mini-label">Why Astro here?</p>
+      <p class="mini-body">
+        Each blog post is compiled to static HTML at build time, so even a large archive stays fast and SEO-friendly
+        without any extra JavaScript bundle.
+      </p>
+    </div>
+    <div class="mini-panel mini-panel--accent">
+      <p class="mini-label">What this demo shows</p>
+      <ul class="mini-list">
+        <li>Shared layouts & navigation</li>
+        <li>Markdown-driven content</li>
+        <li>Design without client JS</li>
+      </ul>
+    </div>
+  </aside>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.9fr) minmax(0, 1.3fr);
+    gap: 2.6rem;
+    margin-bottom: 2.6rem;
+  }
+
+  .hero-left {
+    padding: 2rem 2.2rem;
+    border-radius: 24px;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    background:
+      radial-gradient(circle at top left, rgba(56, 189, 248, 0.2), transparent 58%),
+      radial-gradient(circle at bottom right, rgba(249, 115, 22, 0.18), transparent 65%),
+      rgba(15, 23, 42, 0.96);
+    box-shadow: 0 24px 55px rgba(15, 23, 42, 0.85);
+  }
+
+  .hero-eyebrow {
+    margin: 0 0 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.78rem;
+    color: #a5b4fc;
+  }
+
+  .hero-title {
+    margin: 0;
+    font-size: clamp(2.4rem, 5vw, 3.2rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-kicker {
+    margin: 0.9rem 0 1.5rem;
+    color: #e5e7eb;
+    font-size: 0.98rem;
+    max-width: 32rem;
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .meta-item {
+    padding: 0.9rem 1rem;
+    border-radius: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.55);
+    background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.98));
+  }
+
+  .meta-label {
+    margin: 0 0 0.25rem;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #9ca3af;
+  }
+
+  .meta-value {
+    margin: 0;
+    font-size: 0.86rem;
+  }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .mini-panel {
+    padding: 1.25rem 1.4rem;
+    border-radius: 18px;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    background: rgba(15, 23, 42, 0.96);
+  }
+
+  .mini-panel--accent {
+    background: radial-gradient(circle at top left, rgba(249, 115, 22, 0.2), rgba(15, 23, 42, 0.96));
+  }
+
+  .mini-label {
+    margin: 0 0 0.45rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #9ca3af;
+  }
+
+  .mini-body {
+    margin: 0;
+    font-size: 0.86rem;
+    color: #e5e7eb;
+    line-height: 1.6;
+  }
+
+  .mini-list {
+    margin: 0.2rem 0 0;
+    padding-left: 1.1rem;
+    font-size: 0.86rem;
+    color: #e5e7eb;
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero-left {
+      padding: 1.6rem 1.4rem;
+    }
+
+    .hero-meta {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>
+
+

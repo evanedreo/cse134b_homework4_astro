@@ -1,0 +1,46 @@
+---
+const { tags } = Astro.props as { tags: string[] };
+---
+
+{tags.length > 0 && (
+  <ul class="tag-list" aria-label="Tags">
+    {tags.map((tag) => (
+      <li class="tag-item">
+        <span class="dot" aria-hidden="true" />
+        <span>{tag}</span>
+      </li>
+    ))}
+  </ul>
+)}
+
+<style>
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0.4rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.78rem;
+  }
+
+  .tag-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    background: rgba(15, 23, 42, 0.95);
+    color: #e5e7eb;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 30% 30%, #22d3ee, #f97316);
+  }
+</style>
+
+

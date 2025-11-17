@@ -1,0 +1,116 @@
+---
+import TagList from './TagList.astro';
+
+type Props = {
+  href: string;
+  title: string;
+  description: string;
+  pubDate: Date;
+  tags: string[];
+};
+
+const { href, title, description, pubDate, tags } = Astro.props as Props;
+
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric',
+}).format(pubDate);
+---
+
+<article class="card">
+  <a href={href} class="card-link">
+    <header class="card-header">
+      <p class="card-date">{formattedDate}</p>
+      <h2 class="card-title">{title}</h2>
+      <p class="card-description">{description}</p>
+    </header>
+    <footer class="card-footer">
+      <TagList tags={tags} />
+      <span class="read-link">Read →
+      </span>
+    </footer>
+  </a>
+</article>
+
+<style>
+  .card {
+    border-radius: 18px;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    background:
+      radial-gradient(circle at top left, rgba(30, 64, 175, 0.45), transparent 55%),
+      radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.85);
+    transition:
+      transform 120ms ease-out,
+      box-shadow 120ms ease-out,
+      border-color 120ms ease-out;
+    overflow: hidden;
+  }
+
+  .card-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 1.4rem 1.4rem 1.2rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(251, 191, 36, 0.9);
+    box-shadow:
+      0 24px 55px rgba(15, 23, 42, 0.95),
+      0 0 40px rgba(251, 191, 36, 0.25);
+  }
+
+  .card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .card-date {
+    margin: 0;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #9ca3af;
+  }
+
+  .card-title {
+    margin: 0;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .card-description {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #d1d5db;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.55rem;
+  }
+
+  .read-link {
+    font-size: 0.86rem;
+    color: #fbbf24;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 600px) {
+    .card-link {
+      padding: 1.15rem 1.1rem 1.05rem;
+    }
+  }
+</style>
+
+

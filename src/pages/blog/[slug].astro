@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TagList from '../../components/TagList.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+type BlogEntry = CollectionEntry<'blog'>;
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props as { post: BlogEntry };
+const { title, description, pubDate, updatedDate, tags, hero } = post.data;
+const { Content } = await post.render();
+
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+}).format(pubDate);
+---
+
+<BaseLayout title={`${title} · Astro Minimal JS Lab`} description={description}>
+  <article class="panel article">
+    <header class="article-header">
+      <p class="article-kicker">Astro Minimal JS Lab · Blog</p>
+      <h1 class="article-title">{title}</h1>
+      <p class="article-meta">
+        <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+        {updatedDate && (
+          <>
+            <span aria-hidden="true"> · </span>
+            <span>Updated {new Date(updatedDate).toLocaleDateString('en-US')}</span>
+          </>
+        )}
+      </p>
+      {hero && <p class="article-hero">{hero}</p>}
+      <TagList tags={tags} />
+    </header>
+
+    <hr class="article-divider" />
+
+    <div class="article-body">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .article-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .article-kicker {
+    margin: 0 0 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.76rem;
+    color: #9ca3af;
+  }
+
+  .article-title {
+    margin: 0;
+    font-size: clamp(1.9rem, 4vw, 2.3rem);
+    letter-spacing: -0.03em;
+  }
+
+  .article-meta {
+    margin: 0.7rem 0 0.3rem;
+    font-size: 0.86rem;
+    color: #9ca3af;
+  }
+
+  .article-hero {
+    margin: 0.4rem 0 0.7rem;
+    font-size: 0.94rem;
+    color: #e5e7eb;
+  }
+
+  .article-divider {
+    border: 0;
+    border-top: 1px solid rgba(148, 163, 184, 0.5);
+    margin: 1.1rem 0 1.5rem;
+  }
+
+  .article-body {
+    font-size: 0.98rem;
+    line-height: 1.8;
+  }
+
+  .article-body h2 {
+    margin-top: 1.6rem;
+    margin-bottom: 0.4rem;
+    font-size: 1.3rem;
+  }
+
+  .article-body h3 {
+    margin-top: 1.1rem;
+    margin-bottom: 0.3rem;
+    font-size: 1.05rem;
+  }
+
+  .article-body p {
+    margin: 0.5rem 0;
+  }
+
+  .article-body ul,
+  .article-body ol {
+    padding-left: 1.2rem;
+    margin: 0.5rem 0 0.7rem;
+  }
+
+  .article-body li + li {
+    margin-top: 0.15rem;
+  }
+
+  .article-body code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-size: 0.9em;
+    padding: 0.06rem 0.35rem;
+    border-radius: 4px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.5);
+  }
+</style>
+
+

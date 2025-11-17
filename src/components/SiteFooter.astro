@@ -1,0 +1,97 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="column">
+      <p class="label">About this project</p>
+      <p class="body">
+        Built with <strong>Astro 5</strong> for CSE 134B to demonstrate how a content-heavy static site can stay
+        fast by shipping almost no JavaScript to the browser.
+      </p>
+    </div>
+    <div class="column column--meta">
+      <p class="label">Tech notes</p>
+      <ul class="meta-list">
+        <li>Static-first routing</li>
+        <li>Markdown content collections</li>
+        <li>Shared layouts & components</li>
+        <li>Zero client-side frameworks</li>
+      </ul>
+    </div>
+    <div class="column column--meta">
+      <p class="label">Status</p>
+      <p class="pill">Deployed as static HTML · {year}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 1.25rem 0 2.5rem;
+    border-top: 1px solid rgba(31, 41, 55, 0.9);
+  }
+
+  .footer-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 2.4fr 1.4fr 1.2fr;
+    gap: 1.75rem;
+    font-size: 0.82rem;
+    color: #9ca3af;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .column--meta {
+    align-self: flex-start;
+  }
+
+  .label {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.76rem;
+    color: #6b7280;
+  }
+
+  .body {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .meta-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .pill {
+    align-self: flex-start;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    padding: 0.35rem 0.9rem;
+    background: rgba(15, 23, 42, 0.85);
+    color: #e5e7eb;
+  }
+
+  @media (max-width: 900px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 1.1rem;
+    }
+  }
+</style>
+
+

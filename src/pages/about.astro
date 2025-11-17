@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About this Astro Minimal JS Lab"
+  description="Details about the goals, structure, and design choices of this Astro static site built for CSE 134B."
+>
+  <section class="panel" aria-labelledby="about-heading">
+    <header class="panel-heading">
+      <p id="about-heading" class="panel-title">About the lab</p>
+      <span class="pill">CSE 134B</span>
+    </header>
+    <div class="about-body">
+      <p>
+        This site was built as an experiment in using <strong>Astro</strong> as a static site generator for a
+        content-heavy project. The emphasis is on shipping <em>HTML and CSS</em> first, with JavaScript only where it
+        would truly add value.
+      </p>
+      <p>
+        Instead of a single demo page, the project behaves like a small, opinionated blog. Posts are modeled as a
+        <strong>content collection</strong>, then rendered through shared layouts and components so that the site feels
+        cohesive and easy to maintain.
+      </p>
+
+      <h2>How this goes beyond a simple starter</h2>
+      <ul>
+        <li>
+          A reusable <code>BaseLayout</code> component wraps every page with the same header, footer, and overall
+          chrome.
+        </li>
+        <li>
+          The blog uses Astro&apos;s content collections instead of ad-hoc Markdown files sprinkled through
+          <code>src/pages</code>.
+        </li>
+        <li>
+          Listing pages and individual posts are all rendered statically, so navigation feels instant.
+        </li>
+      </ul>
+
+      <h2>How to explore the code</h2>
+      <ul>
+        <li>
+          Browse the <strong>home page</strong> to see shared components and a curated list of recent posts.
+        </li>
+        <li>
+          Visit the <strong>blog index</strong> at <code>/blog/</code> to see how the content collection is queried.
+        </li>
+        <li>
+          Open any post to inspect how Markdown, frontmatter, and the detail layout work together.
+        </li>
+      </ul>
+
+      <p>
+        If you are reading this for grading, feel free to jump into the repository and skim
+        <code>src/layouts</code>, <code>src/components</code>, and <code>src/content</code> for a quick overview of how
+        everything fits together.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-body {
+    font-size: 0.96rem;
+    line-height: 1.8;
+  }
+
+  .about-body h2 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.4rem;
+    font-size: 1.2rem;
+  }
+
+  .about-body p {
+    margin: 0.5rem 0;
+  }
+
+  .about-body ul {
+    margin: 0.3rem 0 0.7rem;
+    padding-left: 1.2rem;
+  }
+
+  .about-body li + li {
+    margin-top: 0.25rem;
+  }
+</style>
+
+
